@@ -1,0 +1,69 @@
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-icons/social-icons.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-collection.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-document.html">
+
+<dom-module id="team-display">
+	<template>
+		<style>
+		.name {
+			display: inline-block;
+			font-weight: 450;
+			font-size: 20px;
+		    margin-bottom: 10px;
+		}
+		.img-circle {
+			width: 150px;
+			height: 150px;
+			border-radius: 50%;
+		}
+		.descript {
+			display: inline-block;
+			font-weight: 300;
+			font-size: 16px;
+			margin-bottom: 20px;
+		}
+		</style>
+	
+		<template is="dom-bind">
+			 <firebase-collection
+			 location="https://gdgmalaga.firebaseio.com/members"
+			 data={{members}}></firebase-collection>
+			<template is="dom-repeat" items="[[members]]" as="member">
+			<paper-material style="margin-bottom: 10px;">
+				<center>
+				<img src="{{member.photo}}" class="img-circle"></img><br>
+				<div class="name">{{member.name}}</div>
+		   		<div class="descript">{{member.description}}</div>
+		   		<hr>
+				</center>
+				<paper-button><iron-icon icon="social:people"></iron-icon></paper-button>
+			</paper-material>	
+			</template>
+		</template>
+	</template>
+	<script type="text/javascript">
+		Polymer({
+			is: 'team-display',
+
+			properties: { 
+			testing: {
+				name: String,
+				value: 'Sample',
+				notify: true
+			},
+			imgdisplay: {
+				name: String,
+				value: 'http://i.livescience.com/images/i/000/077/669/i02/cat-eyes.jpg?1438963039',
+				notify: true
+			},
+			description: {
+				name: String,
+				value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat mauris, blandit eu lacus in, pharetra lobortis felis. Praesent commodo diam non interdum hendrerit. Vestibulum accumsan eros sit amet nibh feugiat faucibus.'
+			}
+			}
+		});
+	</script>
+</dom-module>
