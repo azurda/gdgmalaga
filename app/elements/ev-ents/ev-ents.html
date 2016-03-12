@@ -1,0 +1,112 @@
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="../../bower_components/google-map/google-map.html">
+<link rel="import" href="../../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-collection.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-document.html">
+<dom-module id="ev-ents">
+  <template>
+    <style>
+      paper-dialog.colored {
+        border: 2px solid;
+        border-color: var(--paper-blue-500);
+      }
+      
+      ;
+      a:link {
+        color: #333;
+        font-weight: 300;
+      }
+      
+      ;
+      a:visited {
+        color: #333;
+        font-weight: 300;
+      }
+      
+      ;
+      paper-material.g {
+        background-color: var(--paper-grey-100);
+      }
+    </style>
+    <template is="dom-bind">
+      <firebase-collection location="https://gdgmalaga.firebaseio.com/eventos" data={{eventos}}></firebase-collection>
+      <template is="dom-repeat" items="[[eventos]]" as="evento">
+        <paper-material class="g">
+          <hr>
+          <center>
+            <h1 style="font-weight: 200; display: block;">{{evento.titulo}}</h1></center>
+          <hr>
+          <section onclick="clickHandler(event)">
+            <center>
+              <paper-button data-dialog="{{evento.id}}" style="font-weight: 300;" raised>¡INFORMATE!</paper-button>
+              <a href="{{evento.meetup}}">
+                <paper-button raised style="margin-bottom: 20px;" raised>MEETUP</paper-button>
+              </a>
+            </center>
+
+            <paper-dialog class="{{evento.id}}" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop class="colored">
+              <h2 style="font-weight: 300;">{{evento.titulo}}</h2>
+              <p style="display: inline-block; font-weight: 100;">
+                <iron-icon icon="maps:place"></iron-icon>{{evento.lugar}}</p>
+              <p>{{evento.descripcion}}</p>
+              <hr>
+              <center>
+                <google-map width="300" latitude="{{evento.coordX}}" longitude="{{evento.coordY}}" api-key="AIzaSyBmZVQKUXYXYVpY7l0b2fNso4z82H5tMvE" zoom="15" style="height: 300px;width: 300px;">
+                  <google-map-marker latitude="{{evento.coordX}}" longitude="{{evento.coordY}}" draggable="true" scrollable="false" title="{{evento.titulo}}"></google-map-marker>
+                </google-map>
+              </center>
+            </paper-dialog>
+          </section>
+        </paper-material>
+      </template>
+    </template>
+  </template>
+  <script>
+    Polymer({
+      is: 'ev-ents',
+
+      properties: {
+        titulo: {
+          type: String,
+          value: 'Evento de ejemplo'
+        },
+        descripcion: {
+          type: String,
+          value: 'Lorem ipsum blablablabalba...'
+        },
+        coordX: {
+          type: String,
+          value: '0.0'
+        },
+        coordY: {
+          type: String,
+          value: '0.0'
+        },
+        lugar: {
+          type: String,
+          value: 'Lugar de ejemplo'
+        }
+
+      }
+    });
+  </script>
+  <script>
+    function clickHandler(e) {
+      var button = e.target;
+      while (!button.hasAttribute('data-dialog') && button !== document.body) {
+        button = button.parentElement;
+      }
+      if (!button.hasAttribute('data-dialog')) {
+        return;
+      }
+      var id = button.getAttribute('data-dialog');
+      var dialog = document.getElementById(id);
+      if (dialog) {
+        dialog.open();
+      }
+    }
+  </script>
+</dom-module>
