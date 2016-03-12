@@ -33,13 +33,15 @@
     </style>
     <template is="dom-bind">
       <firebase-collection location="https://gdgmalaga.firebaseio.com/eventos" data={{eventos}}></firebase-collection>
+      <section onclick="clickHandler(event)">
       <template is="dom-repeat" items="[[eventos]]" as="evento">
+        
         <paper-material class="g">
           <hr>
           <center>
             <h1 style="font-weight: 200; display: block;">{{evento.titulo}}</h1></center>
           <hr>
-          <section onclick="clickHandler(event)">
+         
             <center>
               <paper-button data-dialog="{{evento.id}}" style="font-weight: 300;" raised>¡INFORMATE!</paper-button>
               <a href="{{evento.meetup}}">
@@ -59,8 +61,9 @@
                 </google-map>
               </center>
             </paper-dialog>
-          </section>
+          
         </paper-material>
+        </section>
       </template>
     </template>
   </template>
@@ -68,6 +71,7 @@
     Polymer({
       is: 'ev-ents',
 
+      
       properties: {
         titulo: {
           type: String,
@@ -88,8 +92,10 @@
         lugar: {
           type: String,
           value: 'Lugar de ejemplo'
-        }
-
+        },
+        toggleDialog: function() {
+            this.$.toggleDialog.toggle();
+     	}
       }
     });
   </script>
@@ -108,5 +114,7 @@
         dialog.open();
       }
     }
+    
   </script>
+
 </dom-module>
