@@ -118,29 +118,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="content">
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
             <section data-route="home">
-             <paper-material>
-             El GDG Málaga tiene como objetivo difundir las tecnologías de Google en Málaga, así como impulsar cualquier actividad relacionada con el mundo de la informática.<br>
-			 Queremos crear una comunidad de entusiastas de la tecnología, que puedan ampliar sus conocimientos 	personales con los de otros miembros, ya sea hablando de las tecnologías de Google o no.<br>
-			 Queremos ayudar a difundir estos conocimientos prácticos, tanto si lo que quieres es aprender, como si quieres darlos a conocer. Creemos que el hecho de encontrarnos todos tan cerca, estudiando o trabajando en la Universidad de Málaga, puede ayudar a que estas experiencias y conocimientos nos lleguen más fácilmente. Siempre es mejor aprender en compañía y, ya de paso, divertirse en el proceso.<br> 
+             <paper-material style="font-weight: 300">
+             <h1>Google Developers Group Malaga</h1>
+             El GDG Málaga tiene como objetivo difundir las tecnologías de Google en Málaga, así como impulsar cualquier actividad relacionada con el mundo de la informática.<br><br>
+			 Queremos crear una comunidad de entusiastas de la tecnología, que puedan ampliar sus conocimientos 	personales con los de otros miembros, ya sea hablando de las tecnologías de Google o no.<br><br>
+			 Queremos ayudar a difundir estos conocimientos prácticos, tanto si lo que quieres es aprender, como si quieres darlos a conocer. Creemos que el hecho de encontrarnos todos tan cerca, estudiando o trabajando en la Universidad de Málaga, puede ayudar a que estas experiencias y conocimientos nos lleguen más fácilmente. Siempre es mejor aprender en compañía y, ya de paso, divertirse en el proceso.<br> <br>
 			 </paper-material>
             </section>
 
             <section data-route="eventos">
-              <paper-material elevation="1">
-                <h2 class="page-title">Eventos</h2>
-                <p>This is the users section</p>
-                <a href$="{{baseUrl}}users/Addy">Addy</a><br>
-                <a href$="{{baseUrl}}users/Rob">Rob</a><br>
-                <a href$="{{baseUrl}}users/Chuck">Chuck</a><br>
-                <a href$="{{baseUrl}}users/Sam">Sam</a>
-              </paper-material>
-            </section>
-
-            <section data-route="user-info">
-              <paper-material elevation="1">
-                <h2 class="page-title">User: {{params.name}}</h2>
-                <div>This is {{params.name}}'s section</div>
-              </paper-material>
+             	<ev-ents></ev-ents>
             </section>
 
             <section data-route="equipo">
