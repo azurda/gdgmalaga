@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
-<link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/scale-up-animation.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html">
 <link rel="import" href="../../bower_components/google-map/google-map.html">
@@ -37,18 +38,16 @@
       <template is="dom-repeat" items="[[eventos]]" as="evento">
         
         <paper-material class="g">
-          <hr>
           <center>
             <h1 style="font-weight: 200; display: block;">{{evento.titulo}}</h1></center>
-          <hr>
-         
+        
             <center>
-              <paper-button data-dialog="{{evento.id}}" style="font-weight: 300;" raised>¡INFORMATE!</paper-button>
+              <paper-button data-dialog$="[[ evento.id ]]" style="font-weight: 300;" raised>¡INFORMATE!</paper-button>
               <a href="{{evento.meetup}}">
                 <paper-button raised style="margin-bottom: 20px;" raised>MEETUP</paper-button>
               </a>
             </center>
-
+            
             <paper-dialog id="{{evento.id}}" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop class="colored">
               <h2 style="font-weight: 300;">{{evento.titulo}}</h2>
               <p style="display: inline-block; font-weight: 100;">
@@ -65,7 +64,7 @@
         </paper-material>
        
       </template>
-       </section>
+      </section>
     </template>
   </template>
   <script>
@@ -112,7 +111,6 @@
         dialog.open();
       }
     }
-    
   </script>
 
 </dom-module>
