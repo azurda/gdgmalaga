@@ -1,11 +1,13 @@
-<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card">
 <link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html">
 <link rel="import" href="../../bower_components/google-map/google-map.html">
 <link rel="import" href="../../bower_components/iron-icons/maps-icons.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-collection.html">
+<link rel="import" href="../../bower_components/iron-icons/device-icons.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-document.html">
 <dom-module id="ev-ents">
   <template>
@@ -30,6 +32,7 @@
       ;
       paper-material.g {
         background-color: var(--paper-grey-100);
+        font-weight: 300;
       }
     </style>
     <template is="dom-bind">
@@ -37,12 +40,12 @@
       <section onclick="clickHandler(event)">
       <template is="dom-repeat" items="[[eventos]]" as="evento">
         
-        <paper-material class="g">
+        <paper-card class="g" heading="{{evento.titulo}}" image="{{evento.imagen}}">
+     	
           <center>
-            <h1 style="font-weight: 200; display: block;">{{evento.titulo}}</h1></center>
-        
+
             <center>
-              <paper-button data-dialog$="[[ evento.id ]]" style="font-weight: 300;" raised>¡INFORMATE!</paper-button>
+              <paper-button data-dialog$="[[ evento.id ]]" style="font-weight: 300; margin-top: 10px;" raised>¡INFORMATE!</paper-button>
               <a href="{{evento.meetup}}">
                 <paper-button raised style="margin-bottom: 20px;" raised>MEETUP</paper-button>
               </a>
@@ -50,18 +53,22 @@
             
             <paper-dialog id="{{evento.id}}" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop class="colored">
               <h2 style="font-weight: 300;">{{evento.titulo}}</h2>
+              <paper-dialog-scrollable>
               <p style="display: inline-block; font-weight: 100;">
                 <iron-icon icon="maps:place"></iron-icon>{{evento.lugar}}</p>
+                <br>
+                <iron-icon icon="device:access-time"></iron-icon> {{evento.fecha}}
               <p>{{evento.descripcion}}</p>
               <hr>
               <center>
-                <google-map width="300" latitude="{{evento.coordX}}" longitude="{{evento.coordY}}" api-key="AIzaSyBmZVQKUXYXYVpY7l0b2fNso4z82H5tMvE" zoom="15" style="height: 300px;width: 300px;">
+                <google-map width="300" latitude="{{evento.coordX}}" longitude="{{evento.coordY}}" api-key="AIzaSyBmZVQKUXYXYVpY7l0b2fNso4z82H5tMvE" zoom="16" style="height: 300px;width: 300px;">
                   <google-map-marker latitude="{{evento.coordX}}" longitude="{{evento.coordY}}" draggable="true" scrollable="false" title="{{evento.titulo}}"></google-map-marker>
                 </google-map>
               </center>
+              </paper-dialog-scrollable>
             </paper-dialog>
           
-        </paper-material>
+        </paper-card>
        
       </template>
       </section>
